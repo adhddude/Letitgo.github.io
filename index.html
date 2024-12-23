@@ -8,57 +8,50 @@
         body {
             margin: 0;
             padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
             background-image: url('IMG_1848.JPEG');
             background-size: cover;
             background-position: center;
-            background-repeat: no-repeat;
-            color: white;
             font-family: Arial, sans-serif;
+            color: white;
+            text-align: center;
+        }
+
+        h1 {
+            margin-top: 20vh;
+            font-size: 4em;
         }
 
         .stopwatch {
-            text-align: center;
-            background: rgba(0, 0, 0, 0.5);
-            padding: 20px;
-            border-radius: 10px;
-        }
-
-        .stopwatch h1 {
-            font-size: 2rem;
-            margin: 0 0 10px;
-        }
-
-        .time {
-            font-size: 1.5rem;
-            font-weight: bold;
+            margin-top: 20px;
+            font-size: 2em;
         }
     </style>
 </head>
 <body>
-    <div class="stopwatch">
-        <h1>Let it go ...</h1>
-        <div class="time" id="time">00 Days 00 Hours 00 Minutes 00 Seconds</div>
-    </div>
+    <h1>Let it go ...</h1>
+    <div class="stopwatch" id="stopwatch"></div>
 
     <script>
         function updateStopwatch() {
-            const startTime = new Date('2024-12-2201T00:00:00'); // Replace with your desired start date
+            const startDate = new Date('2024-12-23T12:30:00Z'); // Updated to include 'Z' for UTC timezone
             const now = new Date();
-            const elapsed = now - startTime;
+            const elapsed = now - startDate;
 
-            const days = Math.floor(elapsed / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((elapsed % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((elapsed % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((elapsed % (1000 * 60)) / 1000);
+            if (elapsed >= 0) {
+                const days = Math.floor(elapsed / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((elapsed % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((elapsed % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((elapsed % (1000 * 60)) / 1000);
 
-            document.getElementById('time').textContent = `${days} Days ${hours} Hours ${minutes} Minutes ${seconds} Seconds`;
+                document.getElementById('stopwatch').textContent =
+                    `${days} Days ${hours} Hours ${minutes} Minutes ${seconds} Seconds`;
+            } else {
+                document.getElementById('stopwatch').textContent = 'The countdown has not started yet.';
+            }
         }
 
         setInterval(updateStopwatch, 1000);
     </script>
 </body>
 </html>
+
