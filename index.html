@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stopwatch</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url('IMG_1848.JPEG');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+
+        .stopwatch {
+            text-align: center;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .stopwatch h1 {
+            font-size: 2rem;
+            margin: 0 0 10px;
+        }
+
+        .time {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="stopwatch">
+        <h1>Ongoing Stopwatch</h1>
+        <div class="time" id="time">00 Days 00 Hours 00 Minutes 00 Seconds</div>
+    </div>
+
+    <script>
+        function updateStopwatch() {
+            const startTime = new Date('2024-01-01T00:00:00'); // Replace with your desired start date
+            const now = new Date();
+            const elapsed = now - startTime;
+
+            const days = Math.floor(elapsed / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((elapsed % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((elapsed % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((elapsed % (1000 * 60)) / 1000);
+
+            document.getElementById('time').textContent = `${days} Days ${hours} Hours ${minutes} Minutes ${seconds} Seconds`;
+        }
+
+        setInterval(updateStopwatch, 1000);
+    </script>
+</body>
+</html>
